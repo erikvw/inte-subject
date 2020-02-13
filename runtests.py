@@ -9,7 +9,6 @@ from django.test.runner import DiscoverRunner
 from edc_test_utils import DefaultTestSettings
 from os.path import abspath, dirname, join
 
-
 app_name = 'inte_subject'
 base_dir = dirname(abspath(__file__))
 
@@ -17,6 +16,8 @@ DEFAULT_SETTINGS = DefaultTestSettings(
     calling_file=__file__,
     BASE_DIR=base_dir,
     APP_NAME=app_name,
+    SITE_ID=100,
+    COUNTRY="uganda",
     SUBJECT_VISIT_MODEL="inte_subject.subjectvisit",
     SUBJECT_CONSENT_MODEL="inte_consent.subjectconsent",
     ADVERSE_EVENT_ADMIN_SITE="inte_ae_admin",
@@ -31,9 +32,8 @@ DEFAULT_SETTINGS = DefaultTestSettings(
     EMAIL_ENABLED=True,
     HOLIDAY_FILE=join(base_dir, app_name, "tests", "holidays.csv"),
     LIVE_SYSTEM=False,
-    RANDOMIZATION_LIST_PATH=join(
-        base_dir, app_name, "tests", "test_randomization_list.csv"),
-    EDC_RANDOMIZATION_ASSIGNMENT_MAP={"intervention": 1, "control": 2},
+    RANDOMIZATION_LIST_PATH=join(base_dir, app_name, "tests", "etc"),
+    EDC_RANDOMIZATION_REGISTER_DEFAULT_RANDOMIZER=False,
     INSTALLED_APPS=[
         "django.contrib.admin",
         "django.contrib.auth",
@@ -42,8 +42,8 @@ DEFAULT_SETTINGS = DefaultTestSettings(
         "django.contrib.messages",
         "django.contrib.staticfiles",
         "django.contrib.sites",
-        "django_celery_results",
-        "django_celery_beat",
+        # "django_celery_results",
+        # "django_celery_beat",
         "django_crypto_fields.apps.AppConfig",
         "django_revision.apps.AppConfig",
         "edc_action_item.apps.AppConfig",
